@@ -1,18 +1,13 @@
 import type { Todo } from "../types";
 
-export interface ToDoItemProps {
+export interface toDoItemProp {
   todo: Todo;
-  onToggle: (id: number, done: boolean) => void;
 }
 
-const ToDoItem = ({ todo, onToggle }: ToDoItemProps) => {
+const ToDoItem = ({ todo }: toDoItemProp) => {
   return (
     <div className="to-do-item">
-      <input
-        type="checkbox"
-        checked={todo.done}
-        onChange={(e) => onToggle(todo.id, e.target.checked)}
-      />
+      <input type="checkbox"></input>
       <span>{todo.text}</span>
       <button>x</button>
     </div>

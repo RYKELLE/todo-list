@@ -3,14 +3,13 @@ import type { Todo } from "../types";
 
 interface TodoListProps {
   todolist: Todo[];
-  onToggle: (id: number, done: boolean) => void;
 }
 
-const ToDoList = ({ todolist, onToggle }: TodoListProps) => {
+const ToDoList = ({ todolist }: TodoListProps) => {
   return (
     <>
       {todolist.map((item) => (
-        <ToDoItem key={item.id} todo={item} onToggle={onToggle} />
+        <ToDoItem key={item.id} todo={item} />
       ))}
     </>
   );
