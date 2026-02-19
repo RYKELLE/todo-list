@@ -37,13 +37,17 @@ function App() {
     );
   };
 
+  const onDelete = (id: number) => {
+    setTodos((prev) => prev.filter((item) => item.id != id));
+  };
+
   useEffect(() => {
     console.log(todos);
   }, [todos]);
 
   return (
     <>
-      <ToDoList todolist={todos} onToggle={onToggle} />
+      <ToDoList todolist={todos} onToggle={onToggle} onDelete={onDelete} />
     </>
   );
 }
