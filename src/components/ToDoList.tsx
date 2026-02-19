@@ -5,9 +5,10 @@ interface TodoListProps {
   todolist: Todo[];
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
+  onClear: () => void;
 }
 
-const ToDoList = ({ todolist, onToggle, onDelete }: TodoListProps) => {
+const ToDoList = ({ todolist, onToggle, onDelete, onClear }: TodoListProps) => {
   return (
     <>
       <div>
@@ -24,7 +25,10 @@ const ToDoList = ({ todolist, onToggle, onDelete }: TodoListProps) => {
           ))}
       </div>
       <div>
-        <h3>Finished Tasks</h3>
+        <div>
+          <h3>Finished Tasks</h3>
+          <button onClick={onClear}>Clear</button>
+        </div>
         {todolist
           .filter((item) => item.done === true) //keeps the items that are done
           .map((item) => (

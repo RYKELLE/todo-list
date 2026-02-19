@@ -4,30 +4,14 @@ import ToDoList from "./components/ToDoList";
 import type { Todo } from "./types";
 
 function App() {
-  const initialTodos: Todo[] = [
-    {
-      id: "1",
-      text: "finish thesis and do some jogging",
-      done: false,
-    },
-    {
-      id: "2",
-      text: "Finish to do list app",
-      done: false,
-    },
-    {
-      id: "3",
-      text: "GO to school and do 10 pushups",
-      done: false,
-    },
-    {
-      id: "4",
-      text: "Clean the table",
-      done: false,
-    },
-  ];
+  const initialTodos: Todo[] = [];
 
-  const [todos, setTodos] = useState<Todo[]>(initialTodos);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const savedTodos = localStorage.getItem("todos");
+    if (savedTodos != null) return JSON.parse(savedTodos);
+    return initialTodos;
+  });
+
   const [newtodo, setNewtodo] = useState("");
 
   const onToggle = (id: string) => {
@@ -40,6 +24,10 @@ function App() {
 
   const onDelete = (id: string) => {
     setTodos((prev) => prev.filter((item) => item.id != id));
+  };
+
+  const onClear = () => {
+    setTodos((prev) => prev.filter((item) => item.done === false));
   };
 
   const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
@@ -56,7 +44,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(todos);
+    localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   return (
@@ -70,7 +58,12 @@ function App() {
         ></input>
         <button type="submit">Done</button>
       </form>
-      <ToDoList todolist={todos} onToggle={onToggle} onDelete={onDelete} />
+      <ToDoList
+        todolist={todos}
+        onToggle={onToggle}
+        onDelete={onDelete}
+        onClear={onClear}
+      />
     </>
   );
 }
