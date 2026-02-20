@@ -14,7 +14,9 @@ const ToDoItem = ({ todo, onToggle, onDelete }: ToDoItemProp) => {
         checked={todo.done}
         onChange={() => onToggle(todo.id)}
       ></input>
+
       <span>{todo.text}</span>
+      <span>{todo.dueDate}</span>
       <button onClick={() => onDelete(todo.id)}>x</button>
     </div>
   );
