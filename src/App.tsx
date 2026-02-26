@@ -10,7 +10,7 @@ function App() {
     {
       id: "1",
       name: "None",
-      color: "#E5E7EB", // soft gray
+      color: "#adadaf", // soft gray
     },
     {
       id: "2",

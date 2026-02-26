@@ -16,7 +16,6 @@ const CategorySelector = ({
 
   return (
     <div>
-      <label>Category</label>
       <select
         value={selectedId}
         onChange={(e) => onSelect(e.target.value)}
