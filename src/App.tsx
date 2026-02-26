@@ -51,7 +51,7 @@ function App() {
   });
 
   const [newtodo, setNewtodo] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("1");
   const [todoDate, setTodoDate] = useState<string>("");
 
   const onToggle = (id: string) => {
@@ -83,7 +83,7 @@ function App() {
 
     setTodos((prev) => [...prev, newTodoobject]);
     setNewtodo("");
-    setSelectedCategory("");
+    setSelectedCategory("1");
     setTodoDate("");
   };
 

@@ -1,5 +1,5 @@
 import type { Todo, category } from "../types";
-import "../styles/category.css";
+import "../styles/toDoitem.css";
 export interface ToDoItemProp {
   todo: Todo;
   category: category | undefined;
@@ -16,6 +16,23 @@ const ToDoItem = ({ todo, category, onToggle, onDelete }: ToDoItemProp) => {
       })
     : "";
 
+  const isOverdue =
+    todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.done;
+
+  const daysLeft = Math.ceil(
+    (new Date(todo.dueDate!).getTime() - Date.now()) / 86400000,
+  );
+
+  let dateColorStatus = "";
+
+  if (daysLeft <= 1) {
+    dateColorStatus = "red";
+  } else if (daysLeft > 1 && daysLeft <= 3) {
+    dateColorStatus = "orange";
+  } else {
+    dateColorStatus = "green";
+  }
+
   return (
     <div className="to-do-item">
       <span
@@ -31,6 +48,12 @@ const ToDoItem = ({ todo, category, onToggle, onDelete }: ToDoItemProp) => {
       ></input>
       <span>{todo.text}</span>
       <span>{pretty}</span>
+      {isOverdue && <span className="overdue">OVERDUE!</span>}
+      {!todo.done && !isOverdue && (
+        <span style={{ backgroundColor: dateColorStatus }}>
+          Due in {daysLeft} {daysLeft > 1 ? "days" : "day"}
+        </span>
+      )}
       <button onClick={() => onDelete(todo.id)}>x</button>
     </div>
   );

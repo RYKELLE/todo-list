@@ -16,11 +16,21 @@ const ToDoList = ({
   onDelete,
   onClear,
 }: TodoListProps) => {
+  const sortedTodos = [...todolist].sort((a, b) => {
+    if (a.done !== b.done) return a.done ? 1 : -1;
+
+    if (!a.dueDate && !b.dueDate) return 0;
+    if (!a.dueDate) return 1;
+    if (!b.dueDate) return -1;
+
+    return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+  });
+
   return (
     <>
       <div>
         <h3>To do: </h3>
-        {todolist
+        {sortedTodos
           .filter((item) => item.done === false) //keeps the items that are not yet done
           .map((item) => {
             const category = categories.find((c) => c.id === item.categoryId);
@@ -40,7 +50,7 @@ const ToDoList = ({
           <h3>Finished Tasks</h3>
           <button onClick={onClear}>Clear</button>
         </div>
-        {todolist
+        {sortedTodos
           .filter((item) => item.done === true) //keeps the items that are done
           .map((item) => {
             const category = categories.find((c) => c.id === item.categoryId);

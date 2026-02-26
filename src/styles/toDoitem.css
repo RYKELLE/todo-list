@@ -1,0 +1,14 @@
+.category{
+  padding: 10px;
+  border-radius: 5px;
+}
+.overdue {
+  padding: 10px;
+  background-color: red;
+  border-radius: 10px;
+}
+.one-day-left{
+  padding: 10px;
+  background-color: orange;
+  border-radius: 10px;
+}
