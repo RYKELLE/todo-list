@@ -126,6 +126,7 @@ function App() {
         onToggle={onToggle}
         onDelete={onDelete}
         onClear={onClear}
+        categories={categories}
       />
     </>
   );
