@@ -15,7 +15,7 @@ const CategorySelector = ({
     categories.find((c) => c.id === selectedId)?.color || "#cccccc";
 
   return (
-    <div>
+    <div className="category-container">
       <select
         value={selectedId}
         onChange={(e) => onSelect(e.target.value)}
@@ -29,7 +29,7 @@ const CategorySelector = ({
         <option value={"add_new"}>Add Category</option>
       </select>
       {selectedId === "add_new" && (
-        <div>
+        <div className="category-add">
           <input type="text" placeholder="Enter Category name"></input>
           <input type="color" placeholder="Color"></input>
           <button type="button">+</button>

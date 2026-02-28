@@ -1,4 +1,5 @@
 import ToDoItem from "./ToDoItem";
+import "../styles/toDoList.css";
 import type { category, Todo } from "../types";
 
 interface TodoListProps {
@@ -27,45 +28,51 @@ const ToDoList = ({
   });
 
   return (
-    <>
-      <div>
-        <h3>To do: </h3>
-        {sortedTodos
-          .filter((item) => item.done === false) //keeps the items that are not yet done
-          .map((item) => {
-            const category = categories.find((c) => c.id === item.categoryId);
-            return (
-              <ToDoItem
-                key={item.id}
-                category={category}
-                todo={item}
-                onToggle={onToggle}
-                onDelete={onDelete}
-              /> //displays items that are not yet done
-            );
-          })}
-      </div>
-      <div>
-        <div>
-          <h3>Finished Tasks</h3>
-          <button onClick={onClear}>Clear</button>
+    <div className="todo-lists">
+      <div className="todo-column">
+        <h3>To do</h3>
+        <div className="list-body">
+          {sortedTodos
+            .filter((item) => item.done === false) //keeps the items that are not yet done
+            .map((item) => {
+              const category = categories.find((c) => c.id === item.categoryId);
+              return (
+                <ToDoItem
+                  key={item.id}
+                  category={category}
+                  todo={item}
+                  onToggle={onToggle}
+                  onDelete={onDelete}
+                /> //displays items that are not yet done
+              );
+            })}
         </div>
-        {sortedTodos
-          .filter((item) => item.done === true) //keeps the items that are done
-          .map((item) => {
-            const category = categories.find((c) => c.id === item.categoryId);
-            return (
-              <ToDoItem
-                key={item.id}
-                category={category}
-                todo={item}
-                onToggle={onToggle}
-                onDelete={onDelete}
-              />
-            );
-          })}
       </div>
-    </>
+      <div className="finished-column">
+        <div className="finished-tasks">
+          <h3>Finished Tasks</h3>
+          <button className="clear" onClick={onClear}>
+            Clear
+          </button>
+        </div>
+        <div className="list-body">
+          {sortedTodos
+            .filter((item) => item.done === true) //keeps the items that are done
+            .map((item) => {
+              const category = categories.find((c) => c.id === item.categoryId);
+              return (
+                <ToDoItem
+                  key={item.id}
+                  category={category}
+                  todo={item}
+                  onToggle={onToggle}
+                  onDelete={onDelete}
+                />
+              );
+            })}
+        </div>
+      </div>
+    </div>
   );
 };
 

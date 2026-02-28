@@ -101,7 +101,7 @@ function App() {
   }, [todos]);
 
   return (
-    <>
+    <div className="app-wrapper">
       <form onSubmit={handleAdd}>
         <CategorySelector
           categories={categories}
@@ -110,7 +110,7 @@ function App() {
         />
         <input
           type="text"
-          placeholder="Enter tasks"
+          placeholder="Enter task"
           value={newtodo}
           onChange={(e) => setNewtodo(e.target.value)}
         ></input>
@@ -119,7 +119,7 @@ function App() {
           value={todoDate}
           onChange={(e) => setTodoDate(e.target.value)}
         ></input>
-        <button type="submit">Done</button>
+        <button type="submit">+</button>
       </form>
       <ToDoList
         todolist={todos}
@@ -128,7 +128,7 @@ function App() {
         onClear={onClear}
         categories={categories}
       />
-    </>
+    </div>
   );
 }
 

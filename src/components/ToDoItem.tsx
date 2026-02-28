@@ -35,26 +35,32 @@ const ToDoItem = ({ todo, category, onToggle, onDelete }: ToDoItemProp) => {
 
   return (
     <div className="to-do-item">
-      <span
-        className="category"
-        style={{ backgroundColor: category?.color ?? "#E5E7EB" }}
-      >
-        {category?.name}
-      </span>
-      <input
-        type="checkbox"
-        checked={todo.done}
-        onChange={() => onToggle(todo.id)}
-      ></input>
-      <span>{todo.text}</span>
-      <span>{pretty}</span>
-      {isOverdue && <span className="overdue">OVERDUE!</span>}
-      {!todo.done && !isOverdue && (
-        <span style={{ backgroundColor: dateColorStatus }}>
-          Due in {daysLeft} {daysLeft > 1 ? "days" : "day"}
+      <div className="todo-left">
+        <input
+          type="checkbox"
+          checked={todo.done}
+          onChange={() => onToggle(todo.id)}
+        ></input>
+        <span
+          className="category"
+          style={{ backgroundColor: category?.color ?? "#E5E7EB" }}
+        >
+          {category?.name}
         </span>
-      )}
-      <button onClick={() => onDelete(todo.id)}>x</button>
+        <span className="todo-text">{todo.text}</span>
+      </div>
+      <div className="todo-right">
+        <span className="todo-date">{pretty}</span>
+        {isOverdue && <span className="overdue">OVERDUE!</span>}
+        {!todo.done && !isOverdue && (
+          <span className="badge" style={{ backgroundColor: dateColorStatus }}>
+            Due in {daysLeft} {daysLeft > 1 ? "days" : "day"}
+          </span>
+        )}
+        <button onClick={() => onDelete(todo.id)} className="delete-btn">
+          x
+        </button>
+      </div>
     </div>
   );
 };

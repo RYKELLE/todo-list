@@ -1,96 +1,208 @@
-#root {
-  max-width: 1280px;
+.app-wrapper {
+  width: 100%;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  padding: 24px 24px;
+  box-sizing: border-box;
 }
 
 form {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
   flex-wrap: wrap;
-  padding: 20px;
-  margin: 20px 0;
+  padding: 12px 16px;
+  margin: 16px auto;
+  background: #2b2b2b;
+  border-radius: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #3a3a3a;
+  max-width: 900px;
+  box-sizing: border-box;
 }
 
+/* ── shared input/select/button base ── */
 form select,
 form input[type="text"],
 form input[type="date"],
 form button {
-  font-size: 16px;
-  padding: 10px 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  font-size: 15px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background-color: #1e1e1e;
+  color: #eee;
+  box-sizing: border-box;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
-form select,
+form select:focus,
+form input[type="text"]:focus,
+form input[type="date"]:focus {
+  outline: none;
+  border-color: #646cff;
+  background-color: #292929;
+  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
+}
+
+form input::placeholder {
+  color: #888;
+}
+
+/* ── task text input ── */
+form input[type="text"] {
+  flex: 2 1 180px;
+  min-width: 140px;
+}
+
+/* ── date input ── */
 form input[type="date"] {
-  flex: 1 1 120px;
+  flex: 1 1 140px;
   min-width: 120px;
 }
 
-form input[type="text"] {
-  flex: 2 1 200px;
-  min-width: 200px;
+form input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.5;
 }
 
-form button {
+/* ── submit button ── */
+form button[type="submit"] {
   flex: 0 0 auto;
-  white-space: nowrap;
+  background-color: #3a3a3a;
+  color: #fff;
+  font-weight: 700;
+  font-size: 22px;
+  padding: 6px 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s;
 }
 
-form > div {
-  flex: 1 1 auto;
+form button[type="submit"]:hover {
+  background-color: #00aa33;
+  transform: scale(1.08);
+}
+
+form button[type="submit"]:active {
+  transform: scale(0.97);
+}
+
+/* ── category selector ── */
+.category-container {
   display: flex;
+  align-items: center;
   gap: 8px;
-  min-width: 150px;
+  flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
+.category-container select {
+  flex: 0 0 auto;
+  min-width: 130px;
+  padding: 10px 32px 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background-color: #1e1e1e;
+  color: #eee;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><polyline points='1,1 5,5 9,1' fill='none' stroke='%23eee' stroke-width='2'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.category-container select:focus {
+  outline: none;
+  border-color: #646cff;
+  background-color: #292929;
+}
+
+.category-container select option {
+  background-color: #1e1e1e;
+  color: #eee;
+  font-weight: 400;
+}
+
+/* ── add category inline panel ── */
+.category-add {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding-left: 10px;
+  border-left: 1px solid #444;
+}
+
+.category-add input[type="text"] {
+  width: 130px;
+  padding: 8px 10px;
+  font-size: 13px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  color: #eee;
+  flex: none;
+  min-width: unset;
+}
+
+.category-add input[type="text"]::placeholder {
+  color: #777;
+}
+
+.category-add input[type="color"] {
+  width: 36px;
+  height: 36px;
+  padding: 2px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  cursor: pointer;
+  flex: none;
+}
+
+.category-add button {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4a4aff;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  flex: none;
+  transition: background-color 0.2s;
+}
+
+.category-add button:hover {
+  background-color: #5c5cff;
+}
+
+/* ── responsive ── */
+@media (max-width: 600px) {
   form {
+    gap: 8px;
+  }
+
+  form input[type="text"],
+  form input[type="date"] {
+    flex: 1 1 100%;
+  }
+
+  .category-container {
     flex-wrap: wrap;
   }
 
-  form select,
-  form input[type="text"],
-  form input[type="date"],
-  form button {
-    flex: 1 1 auto;
-    min-width: 100px;
+  .category-add {
+    border-left: none;
+    border-top: 1px solid #444;
+    padding-left: 0;
+    padding-top: 8px;
+    flex-wrap: wrap;
   }
 }
